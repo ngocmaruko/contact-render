@@ -20,7 +20,7 @@ app.post('/api/send', (req, res) => {
   });
 
   const mailOptions = {
-    from: email,
+    from: `NEXT-18 PROTEINホームページからお問い合わせ ${process.env.EMAIL_USER}`,
     to: process.env.COMPANY_EMAIL,
     subject: `New message from ${name}`,
     text: `
