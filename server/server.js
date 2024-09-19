@@ -22,7 +22,7 @@ app.post('/api/send', (req, res) => {
   const mailOptions = {
     from: `NEXT-18 PROTEINホームページからお問い合わせ ${process.env.EMAIL_USER}`,
     to: process.env.COMPANY_EMAIL,
-    subject: `New message from ${name}`,
+    subject: `NEXT-18 PROTEINホームページからお問い合わせ`,
     text: `
       ※このメールはシステムからの自動返信です
 
