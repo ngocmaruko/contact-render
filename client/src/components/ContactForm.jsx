@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
+    furigana: '',
+    phone: '',
     email: '',
-    message: ''
+    message: '',
   });
   const [status, setStatus] = useState('');
 
@@ -12,7 +14,7 @@ const ContactForm = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -22,14 +24,14 @@ const ContactForm = () => {
       const response = await fetch('https://contact-render.onrender.com/api/send', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         setStatus('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', furigana: '', phone: '', email: '', message: '' });
       } else {
         setStatus('Failed to send message.');
       }
@@ -45,7 +47,23 @@ const ContactForm = () => {
         name="name"
         value={formData.name}
         onChange={handleChange}
-        placeholder="Your Name"
+        placeholder="お名前"
+        required
+      />
+      <input
+        type="text"
+        name="furigana"
+        value={formData.furigana}
+        onChange={handleChange}
+        placeholder="お名前フリガナ"
+        required
+      />
+      <input
+        type="tel"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        placeholder="電話番号"
         required
       />
       <input
@@ -53,14 +71,14 @@ const ContactForm = () => {
         name="email"
         value={formData.email}
         onChange={handleChange}
-        placeholder="Your Email"
+        placeholder="メールアドレス"
         required
       />
       <textarea
         name="message"
         value={formData.message}
         onChange={handleChange}
-        placeholder="Your Message"
+        placeholder="お問い合わせ内容"
         required
       />
       <button type="submit">Send Message</button>
